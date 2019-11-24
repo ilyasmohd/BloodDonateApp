@@ -1,0 +1,26 @@
+<h3>Here are the Blood donors presently available....</h3>
+
+<table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Blood Type</th>
+            <th scope="col">Donar Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Cotact Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Available</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let donor of bloodDonorsList; let i= index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{donor.BloodType}}</td>
+            <td>{{donor.DonarName}}</td>
+            <td>{{donor.Location}}</td>
+            <td>{{donor.CotactNo}}</td>
+            <td>{{donor.Email}}</td>
+            <td>{{donor.Available}}</td>
+          </tr>
+        </tbody>
+      </table>
