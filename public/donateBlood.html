@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Donate Blood to Donate Life</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Donate Blood to Donate Life">
+    <meta name="keywords" content="Donate, Donate Blood, Donate Life">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/cities.js"></script>
+    <script src="./js/registerDonor.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/init-firebase.js"></script>
+    <script src="./js/init_login.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-xl navbar-dark bg-primary">
+        <a class="navbar-brand" style="color: #000;" href="/"><img
+                style="width: 50px; height: 50px; margin-right: 20px;" src="./assets/logo.png" alt="logo">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentXL"
+            aria-controls="navbarSupportedContentXL" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" class="nav-item active">
+                    <a class="nav-link" href="./searchDonors.html">Search Blood Donors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./donateBlood.html">Donate Blood</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div id="container">
+        <div id="loading">Loading...</div>
+        <div id="loaded" class="hidden">
+            <div id="main">
+                <div id="user-signed-in" class="hidden">
+                    <div id="user-info">
+                        <!-- <div id="photo-container">
+                  <img id="photo">
+                </div> 
+                        <div id="name"></div>
+                        <div id="email"></div>
+                        <div id="phone"></div>
+                        <div id="is-new-user"></div>
+                        <div class="clearfix"></div>-->
+                    </div>
+                    <!-- <p>
+                <button id="sign-out">Sign Out</button>
+                <button id="delete-account">Delete account</button> 
+              </p> -->
+                </div>
+                <div id="user-signed-out" class="hidden">
+                    <!-- <h4>You are signed out.</h4> -->
+                    <div id="firebaseui-spa">
+                        <h5>You have to register before you can Donate Blood, You can login by one of below options:
+                        </h5>
+                        <div id="firebaseui-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="register-donor" class="container-fluid">
+        <h3>Register yourself as Donor:-</h3>
+        <form id="registerDonor">
+            <div class="form-group">
+                <label for="states">Select Your State:</label>
+                <select id="states" name="states" class="form-control" required></select>
+            </div>
+            <div class="form-group">
+                <label for="cities">Select Your City:</label>
+                <select id="cities" name="cities" class="form-control" required></select>
+            </div>
+            <div class="form-group">
+                <label for="bloodGroup">Select Your Blood Group:</label>
+                <select id="bloodGroup" name="bloodGroup" class="form-control" required>
+                    <option value="Select">--Select--</option>
+                    <option value="A+">A+</option>
+                    <option value="B+">B+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="O+">O+</option>
+                    <option value="A-">A-</option>
+                    <option value="B-">B-</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="donorName">Enter your Name:</label>
+                <input class="form-control" id="donorName" placeholder="Enter your Name">
+            </div>
+            <div class="form-group">
+                <label for="donorContactNo">Enter your Contact Number:</label>
+                <input class="form-control" id="donorContactNo" placeholder="Enter your Contact No">
+            </div>
+            <div class="form-group">
+                <label for="donorEmail">Enter your Email:</label>
+                <input class="form-control" id="donorEmail" aria-describedby="emailHelp" placeholder="Enter your email">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+            <div class="form-group">
+                <label for="donationOn">Last Donated Blood on:</label>
+                <input class="form-control" id="donationOn" name="donationOn" aria-describedby="emailHelp"
+                    placeholder="Provide date on which you donated blood last time">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+            <button id="register" type="submit" class="btn btn-primary">Register</button>
+            <!--  <button id="updateDonor" type="submit" class="btn btn-primary">Register</button> -->
+        </form>
+    </div>
+    <br>
+
+</body>
+
+</html>

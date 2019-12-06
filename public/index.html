@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Donate Blood to Donate Life</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Donate Blood to Donate Life">
+    <meta name="keywords" content="Donate, Donate Blood, Donate Life">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-xl navbar-dark bg-primary">
+        <a class="navbar-brand" style="color: #000;" href="/"><img
+                style="width: 50px; height: 50px; margin-right: 20px;" src="./assets/logo.png" alt="logo">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentXL"
+            aria-controls="navbarSupportedContentXL" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" class="nav-item active">
+                    <a class="nav-link" href="./searchDonors.html">Search Blood Donors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./donateBlood.html">Donate Blood</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+
+    <div class="container-fluid">
+        <h3>Basic Navbar </h3>
+        <p>A navigation bar is a navigation header that is placed at the top of the page.</p>
+    </div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/cities.js"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script defer src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src="./js/init-firebase.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
