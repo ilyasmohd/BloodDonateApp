@@ -55,7 +55,10 @@ function FireBaseRegisterDonor(donor) {
     docRef.get().then(function (thisDoc) {
         if (thisDoc.exists) {
             console.log('user exisits, updating now....', donor);
-            docRef.update(donor.donorDetails);
+            docRef.update(donor.donorDetails).then(function(){
+                alert('You have successfully updated your details');
+                window.location = './searchDonors.html';
+            })
         } else {
             console.log('created new user');
             //docRef.set(donor.donorDetails);
