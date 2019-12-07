@@ -37,8 +37,8 @@ function FireBaseSearchDonors(donor) {
                             <td>${doc.data().State}, ${doc.data().City}</td>
                             <td>${doc.data().ContactNo}</td>
                             <td>${doc.data().Email}</td>
-                            <td>${(new Date(doc.data().LastDonatedDate.seconds*1000)).toLocaleDateString("en-US")}</td>
-                            <td>true</td>
+                            <td>${(doc.data().LastDonatedDate)}</td>
+                            <td>Yes</td>
                             </tr>`);
             });
         })
@@ -62,6 +62,7 @@ function FireBaseRegisterDonor(donor) {
             db.collection("Donors").add(donor.donorDetails).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     alert('You have successfully registerd as donor');
+                    window.location = './searchDonors.html';
                 })
                 .catch(function (error) {
                     console.error("Error adding document: ", error);
@@ -107,13 +108,14 @@ function CheckDonorExists(donor) {
                     console.log("id from firestore", doc.id);
                     donorReferenceID = doc.id;
                     donor.RegisterDonor();
+                    //console.log('LastDonatedDate:', doc.data().LastDonatedDate);
                     PopulateDonorUIDetails(doc.data().DonorName.trim(),
                         doc.data().State.trim(),
                         doc.data().City.trim(),
                         doc.data().ContactNo.trim(),
                         doc.data().Email.trim(),
                         doc.data().BloodGroup.trim(),
-                        (new Date(doc.data().LastDonatedDate.trim().seconds * 1000)).toLocaleDateString("en-US")
+                        (doc.data().LastDonatedDate)
                     );
                 });
             }

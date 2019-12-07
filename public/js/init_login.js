@@ -108,10 +108,7 @@ var handleSignedInUser = function (user) {
     document.getElementById('user-signed-in').style.display = 'block';
     document.getElementById('user-signed-out').style.display = 'none';
     document.getElementById('register-donor').style.display = 'block';
-    //document.getElementById('name').textContent = user.displayName;
-    //document.getElementById('email').textContent = user.email;
-    //document.getElementById('phone').textContent = user.phoneNumber;
-    console.log('user email:', user.email, 'displayName', user.displayName, 'phoneNumber', user.phoneNumber);
+    //console.log('user email:', user.email, 'displayName', user.displayName, 'phoneNumber', user.phoneNumber);
     CheckDonor(user.email, user.displayName, user.phoneNumber);
 };
 
@@ -129,7 +126,7 @@ var handleSignedOutUser = function () {
 // Listen to change in auth state so it displays the correct UI for when
 // the user is signed in or not.
 firebase.auth().onAuthStateChanged(function (user) {
-    console.log('auth changes onAuthStateChanged...');
+    //console.log('auth changes onAuthStateChanged...');
     document.getElementById('loading').style.display = 'none';
     document.getElementById('loaded').style.display = 'block';
     user ? handleSignedInUser(user) : handleSignedOutUser();

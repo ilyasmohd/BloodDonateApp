@@ -1,29 +1,21 @@
 $(document).ready(function () {
-
-    let states = state_arr;
-    let cities = city_arr;
     let stateElement = document.getElementById("states");
     let cityElement = document.getElementById("cities");
-    states.forEach((element, index) => {
+    state_arr.forEach((element, index) => {
         stateElement.options[stateElement.options.length] = new Option(element.trim(), index);
     });
 
     $('#states').on('change', function (value, index) {
         $('#cities').empty();
-        let selectedStateCities = cities[$('#states :selected').val()].split("|"); //select all the cities of selected state
-        console.log('states changed called, selected state cities object as floowows', selectedStateCities);
+        let selectedStateCities = city_arr[$('#states :selected').val()].split("|"); //select all the cities of selected state
         selectedStateCities.forEach((element, index) => {
-            //console.log(index);
             cityElement.options[cityElement.options.length] = new Option(element.trim(), index);
         });
     });
 
     $('#cities').on('change', function (value, index) {
-        // console.log($('#cities :selected').text());
         registerDonorObj.donorDetails.State = $('#states :selected').text();
         registerDonorObj.donorDetails.City = $('#cities :selected').text();
-        // console.log(registerDonorObj.donorDetails.State);
-        // console.log(searchDonorObj.donorDetails.City);
     });
 
     $('#bloodGroup').on('change', function (value, index) {
@@ -37,6 +29,7 @@ $(document).ready(function () {
         registerDonorObj.donorDetails.Email = $('#donorEmail').val();
         registerDonorObj.donorDetails.LastDonatedDate = $('#donationOn').val();
         FireBaseRegisterDonor(registerDonorObj);
+        
     });
 
 });
@@ -78,7 +71,7 @@ PopulateDonorUIDetails = function (DonorName, State, City, ContactNo, Email, Blo
     let disableRegisterButton = false;
     let stateIndex = 0;
     let cityIndex = 0;
-    console.log("DonorName:", DonorName, ",State:", State, ",City:", City, ",ContactNo:", ContactNo, ",Email:", Email, ",BloodGroup:", BloodGroup, ",BloodDonationDate:", BloodDonationDate);
+    //console.log("DonorName:", DonorName, ",State:", State, ",City:", City, ",ContactNo:", ContactNo, ",Email:", Email, ",BloodGroup:", BloodGroup, ",BloodDonationDate:", BloodDonationDate);
 
     if (DonorName != null) {
         $('#donorName').attr('readonly', true);
@@ -101,47 +94,54 @@ PopulateDonorUIDetails = function (DonorName, State, City, ContactNo, Email, Blo
         disableRegisterButton = true;
     }
 
-    if (State != null) {
+    if (State != null && State != "") {
+        //console.log('State:', State);
+        registerDonorObj.donorDetails.State = State;
         stateIndex = state_arr.indexOf(State);
-        //$('#states').val(stateIndex);
-        $('#states option')[stateIndex].selected = true;
-        $('#states').attr('readonly', true);
-
+        let stateElement = document.getElementById("states");
+        stateElement.selectedIndex = stateIndex;
+        $(stateElement).attr('disabled', true);
     } else {
         disableRegisterButton = true;
     }
 
-    if (City != null) {
-        cityIndex = city_arr[stateIndex].indexOf(City);
-        //$('#cities option')[cityIndex].selected = true;
-        //$('#cities').attr('readonly', true);
-        //$('#cities').val(City).change();
+    if (City != null && City != "") {
+        registerDonorObj.donorDetails.City = City;
+        let cityElement = document.getElementById("cities");
+        //console.log('state index:', stateIndex); 
+        let selectedStateCities = city_arr[stateIndex].split("|"); //select all the cities of selected state
+        selectedStateCities.forEach((element, index) => {
+            cityElement.options[cityElement.options.length] = new Option(element.trim(), index);
+            if (City.trim() == element.trim()) {
+                cityIndex = index;
+            }
+        });
+        cityElement.selectedIndex = cityIndex;
+        $(cityElement).attr('disabled', true);
     } else {
         disableRegisterButton = true;
     }
 
-    if (BloodGroup != null) {
-        $('#bloodGroup').attr('readonly', true);
-        //$('#bloodGroup').val(BloodGroup).change();
+    if (BloodGroup != null && BloodGroup != "") {
+        $('#bloodGroup').val(BloodGroup).change();
+        $('#bloodGroup').attr('disabled', true);
+        registerDonorObj.donorDetails.BloodGroup = BloodGroup;
     } else {
         disableRegisterButton = true;
     }
 
-    if (BloodDonationDate != null) {
-        $('#donationOn').attr('readonly', true);
+    if (BloodDonationDate != null && BloodDonationDate != "") {
         $('#donationOn').val(BloodDonationDate);
+        registerDonorObj.donorDetails.LastDonatedDate = BloodDonationDate;
     } else {
         disableRegisterButton = true;
     }
 
     if (disableRegisterButton == true) {
-        $('#register').attr('readonly', false);
+        $('#register').attr('disabled', false);
     } else {
-        $('#register').attr('readonly', true);
+        document.getElementById("register").value = "Update Previous Blood Donated Date";
+        document.getElementById("register").innerHTML = "Update Previous Blood Donated Date";
+        document.getElementById("register").innerText = "Update Previous Blood Donated Date";
     }
 };
-/*
-var x = document.getElementById("mySelect").selectedIndex;
-var y = document.getElementById("mySelect").options;
-alert("Index: " + y[x].index + " is " + y[x].text);
-*/
