@@ -78,7 +78,7 @@ ui.disableAutoSignIn();
  * @return {string} The URL of the FirebaseUI standalone widget.
  */
 function getWidgetUrl() {
-    return '/widget#recaptcha=' + getRecaptchaMode() + '&emailSignInMethod=' +
+    return '/widget.html#recaptcha=' + getRecaptchaMode() + '&emailSignInMethod=' +
         getEmailSignInMethod();
 }
 
@@ -105,11 +105,12 @@ var signInWithPopup = function () {
  */
 var handleSignedInUser = function (user) {
     console.log('user logged in.....');
+    CheckDonor(user.email, user.displayName, user.phoneNumber);
     document.getElementById('user-signed-in').style.display = 'block';
     document.getElementById('user-signed-out').style.display = 'none';
     document.getElementById('register-donor').style.display = 'block';
     //console.log('user email:', user.email, 'displayName', user.displayName, 'phoneNumber', user.phoneNumber);
-    CheckDonor(user.email, user.displayName, user.phoneNumber);
+
 };
 
 

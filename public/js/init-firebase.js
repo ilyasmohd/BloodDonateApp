@@ -16,6 +16,9 @@ var donorReferenceID = "0";
 
 function FireBaseSearchDonors(donor) {
     // [START get_all]
+    // document.getElementById('searchFormLoading').style.display = 'block';
+    $('#searchFormLoading').css('display', 'block');
+    $('#unavailableError').css('display', 'none');
     console.log("searching donors....");
     //console.log(donor.donorDetails.State, donor.donorDetails.City, donor.donorDetails.BloodGroup); return;
     let query = db.collection('Donors')
@@ -26,10 +29,16 @@ function FireBaseSearchDonors(donor) {
     query.get()
         .then(snapshot => {
             //console.log('total data', snapshot.docs.length);
-            $('#SearchDonors tbody').empty();
-            snapshot.forEach(function (doc) {
-                //console.log(doc.id, '=>', doc.data());
-                $('#SearchDonors > tbody:last-child').append(`
+            if (snapshot.docs.length <= 0) {
+                $('#DonorsTable').css('display', 'none');
+                $('#noDonorsFound').css('display', 'block');
+            } else {
+                $('#DonorsTable').css('display', 'block');
+                $('#noDonorsFound').css('display', 'none');
+                $('#DonorsTable tbody').empty();
+                snapshot.forEach(function (doc) {
+                    //console.log(doc.id, '=>', doc.data());
+                    $('#DonorsTable > tbody:last-child').append(`
                             <tr>
                             <td>${++index}</td>
                             <td>${doc.data().BloodGroup}</td>
@@ -37,25 +46,66 @@ function FireBaseSearchDonors(donor) {
                             <td>${doc.data().State}, ${doc.data().City}</td>
                             <td>${doc.data().ContactNo}</td>
                             <td>${doc.data().Email}</td>
-                            <td>${(doc.data().LastDonatedDate)}</td>
+                            <td>${new Date((doc.data().LastDonatedDate)).toDateString()}</td>
                             <td>Yes</td>
                             </tr>`);
-            });
+                });
+            }
+            //document.getElementById('searchFormLoading').style.display = 'none';
+            $('#searchFormLoading').css('display', 'none');
         })
         .catch(err => {
             console.log('Error getting documents', err);
-            alert(err);
+            $('#unavailableError').html(err.message);
+            $('#unavailableError').css('display', 'block');
+            alert(err.message);
         });
 }
 
 function FireBaseRegisterDonor(donor) {
+    $('#unavailableError').css('display', 'none');
+    var donorName = $("#donorName").val();
+    var donorContactNo = $("#donorContactNo").val();
+    var donorEmail = $("#donorEmail").val();
+    // var bloodGroup = $("#bloodGroup").val(); 
+    var states = $("#states").val();
+    var cities = $("#cities").val();
+    var bloodGroup = $("#bloodGroup option:selected").text();
+    var donationOn = $("#donationOn").val();
+    if (donorContactNo.length != 10) {
+        alert("Mobile number should be 10 digits");
+        return false;
+    }
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!regex.test(donorEmail)) {
+        alert("Please enter valid email id");
+        return false;
+    }
+    if (states == "--Select State--") {
+        alert("Please select any one State");
+        return false;
+    }
+    if (states == "--Select City--") {
+        alert("Please select any one City");
+        return false;
+    }
+    if (bloodGroup == "-Select-") {
+        alert("Please select any one blood group");
+        return false;
+    }
+
+
+    $('#donorContactNo').bind('keyup paste', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
     console.log('searching for donor id:', donorReferenceID);
     var docRef = db.collection("Donors").doc(donorReferenceID);
     //var o = {};
     docRef.get().then(function (thisDoc) {
         if (thisDoc.exists) {
             console.log('user exisits, updating now....', donor);
-            docRef.update(donor.donorDetails).then(function(){
+            docRef.update(donor.donorDetails).then(function () {
                 alert('You have successfully updated your details');
                 window.location = './searchDonors.html';
             })
@@ -64,21 +114,28 @@ function FireBaseRegisterDonor(donor) {
             //docRef.set(donor.donorDetails);
             db.collection("Donors").add(donor.donorDetails).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
-                    alert('You have successfully registerd as donor');
+                    //alert('You have successfully registerd as donor');
                     window.location = './searchDonors.html';
                 })
                 .catch(function (error) {
                     console.error("Error adding document: ", error);
-                    alert(error);
+                    $('#unavailableError').css('display', 'block');
+                    $('#unavailableError').html(error.message);
+                    alert(error.message);
                 });
         }
     }).catch(function (error) {
         console.log(error.message);
+        $('#unavailableError').css('display', 'block');
+        $('#unavailableError').html(error.message);
+        alert(error.message);
     });
 }
 
 function CheckDonorExists(donor) {
     console.log("searching donors....");
+    document.getElementById('registerFormLoading').style.display = 'block';
+    $('#unavailableError').css('display', 'none');
     //console.log(donor.donorDetails.State, donor.donorDetails.City, donor.donorDetails.BloodGroup); return;
     let query = db.collection('Donors');
 
@@ -106,6 +163,7 @@ function CheckDonorExists(donor) {
                     null,
                     null
                 );
+                document.getElementById('registerFormLoading').style.display = 'none';
             } else {
                 snapshot.forEach(function (doc) {
                     console.log("id from firestore", doc.id);
@@ -120,11 +178,14 @@ function CheckDonorExists(donor) {
                         doc.data().BloodGroup.trim(),
                         (doc.data().LastDonatedDate)
                     );
+                    document.getElementById('registerFormLoading').style.display = 'none';
                 });
             }
         })
         .catch(err => {
             console.log('Error getting documents', err);
-            alert(err);
+            alert(err.message);
+            $('#unavailableError').css('display', 'block');
+            $('#unavailableError').html(err.message);
         });
 }

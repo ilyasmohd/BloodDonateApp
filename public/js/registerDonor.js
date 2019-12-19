@@ -24,12 +24,12 @@ $(document).ready(function () {
 
     $('#registerDonor').on('submit', function (e) {
         e.preventDefault();
+        document.getElementById('registerFormLoading').style.display = 'block';
         registerDonorObj.donorDetails.ContactNo = $('#donorContactNo').val();
         registerDonorObj.donorDetails.DonorName = $('#donorName').val();
         registerDonorObj.donorDetails.Email = $('#donorEmail').val();
         registerDonorObj.donorDetails.LastDonatedDate = $('#donationOn').val();
         FireBaseRegisterDonor(registerDonorObj);
-        
     });
 
 });
