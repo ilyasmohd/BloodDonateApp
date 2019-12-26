@@ -19,25 +19,10 @@
 /**
  * @return {!Object} The FirebaseUI config.
  */
-function getUiConfig() {
-    return {
-        'callbacks': {
-            // Called when the user has been successfully signed in.
-            'signInSuccessWithAuthResult': function (authResult, redirectUrl) {
-                if (authResult.user) {
-                    handleSignedInUser(authResult.user);
-                }
-                if (authResult.additionalUserInfo) {
-                    document.getElementById('is-new-user').textContent =
-                        authResult.additionalUserInfo.isNewUser ?
-                        'New User' : 'Existing User';
-                }
-                // Do not redirect.
-                return false;
-            }
-        },
-        // Opens IDP Providers sign-in flow in a popup.
-        'signInOptions': [
+
+function getSignInMethods() {
+    if (location.protocol == 'https:' || location.protocol == 'http:') {
+        return [
             // TODO(developer): Remove the providers you don't need for your app.
             {
                 provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -58,7 +43,36 @@ function getUiConfig() {
                     size: getRecaptchaMode()
                 }
             }
-        ],
+        ];
+    } else {
+        return [{
+            provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+            recaptchaParameters: {
+                size: getRecaptchaMode()
+            }
+        }]
+    }
+}
+
+function getUiConfig() {
+    return {
+        'callbacks': {
+            // Called when the user has been successfully signed in.
+            'signInSuccessWithAuthResult': function (authResult, redirectUrl) {
+                if (authResult.user) {
+                    handleSignedInUser(authResult.user);
+                }
+                if (authResult.additionalUserInfo) {
+                    document.getElementById('is-new-user').textContent =
+                        authResult.additionalUserInfo.isNewUser ?
+                        'New User' : 'Existing User';
+                }
+                // Do not redirect.
+                return false;
+            }
+        },
+        // Opens IDP Providers sign-in flow in a popup.
+        'signInOptions': getSignInMethods(),
         // Terms of service url.
         'tosUrl': 'https://www.google.com',
         // Privacy policy url.

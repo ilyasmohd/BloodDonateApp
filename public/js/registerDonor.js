@@ -80,8 +80,9 @@ PopulateDonorUIDetails = function (DonorName, State, City, ContactNo, Email, Blo
         disableRegisterButton = true;
     }
 
+    
     if (ContactNo != null) {
-        $('#donorContactNo').attr('readonly', true);
+        //$('#donorContactNo').attr('readonly', true);
         $('#donorContactNo').val(ContactNo);
     } else {
         disableRegisterButton = true;

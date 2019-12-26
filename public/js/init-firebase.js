@@ -72,10 +72,10 @@ function FireBaseRegisterDonor(donor) {
     var cities = $("#cities").val();
     var bloodGroup = $("#bloodGroup option:selected").text();
     var donationOn = $("#donationOn").val();
-    if (donorContactNo.length != 10) {
+    /*if (donorContactNo.length != 10) {
         alert("Mobile number should be 10 digits");
         return false;
-    }
+    }*/
     var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if (!regex.test(donorEmail)) {
         alert("Please enter valid email id");
