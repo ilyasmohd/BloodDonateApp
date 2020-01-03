@@ -21,7 +21,8 @@
  */
 
 function getSignInMethods() {
-    if (location.protocol == 'https:' || location.protocol == 'http:') {
+    if (new URLSearchParams(window.location.search).has('mobileUser') == false) {
+        //console.log('dint found mobile users');
         return [
             // TODO(developer): Remove the providers you don't need for your app.
             {
@@ -30,13 +31,13 @@ function getSignInMethods() {
                 authMethod: 'https://accounts.google.com',
                 // Required to enable ID token credentials for this provider.
                 clientId: CLIENT_ID
-            },
-            {
-                provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                // Whether the display name should be displayed in Sign Up page.
-                requireDisplayName: true,
-                signInMethod: getEmailSignInMethod()
-            },
+            }, //,
+            //{
+            //     provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            //     // Whether the display name should be displayed in Sign Up page.
+            //     requireDisplayName: true,
+            //     signInMethod: getEmailSignInMethod()
+            // },
             {
                 provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
                 recaptchaParameters: {
@@ -45,6 +46,7 @@ function getSignInMethods() {
             }
         ];
     } else {
+        //console.log('found mobile users');
         return [{
             provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
             recaptchaParameters: {

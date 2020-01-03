@@ -38,7 +38,9 @@ function FireBaseSearchDonors(donor) {
                 $('#DonorsTable tbody').empty();
                 snapshot.forEach(function (doc) {
                     //console.log(doc.id, '=>', doc.data());
-                    $('#DonorsTable > tbody:last-child').append(`
+                    console.log(doc.data().LastDonatedDate);
+                    if (doc.data().DontDonate != true) {
+                        $('#DonorsTable > tbody:last-child').append(`
                             <tr>
                             <td>${++index}</td>
                             <td>${doc.data().BloodGroup}</td>
@@ -46,9 +48,9 @@ function FireBaseSearchDonors(donor) {
                             <td>${doc.data().State}, ${doc.data().City}</td>
                             <td>${doc.data().ContactNo}</td>
                             <td>${doc.data().Email}</td>
-                            <td>${new Date((doc.data().LastDonatedDate)).toDateString()}</td>
-                            <td>Yes</td>
+                            <td>${doc.data().LastDonatedDate == '1900-01-01'? 'Never Donated':new Date((doc.data().LastDonatedDate)).toDateString()}</td>
                             </tr>`);
+                    }
                 });
             }
             //document.getElementById('searchFormLoading').style.display = 'none';
@@ -63,50 +65,16 @@ function FireBaseSearchDonors(donor) {
 }
 
 function FireBaseRegisterDonor(donor) {
+    //document.getElementById('registerFormLoading').style.display = 'block';
+    $('#registerFormLoading').css('display', 'block');
     $('#unavailableError').css('display', 'none');
-    var donorName = $("#donorName").val();
-    var donorContactNo = $("#donorContactNo").val();
-    var donorEmail = $("#donorEmail").val();
-    // var bloodGroup = $("#bloodGroup").val(); 
-    var states = $("#states").val();
-    var cities = $("#cities").val();
-    var bloodGroup = $("#bloodGroup option:selected").text();
-    var donationOn = $("#donationOn").val();
-    /*if (donorContactNo.length != 10) {
-        alert("Mobile number should be 10 digits");
-        return false;
-    }*/
-    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if (!regex.test(donorEmail)) {
-        alert("Please enter valid email id");
-        return false;
-    }
-    if (states == "--Select State--") {
-        alert("Please select any one State");
-        return false;
-    }
-    if (states == "--Select City--") {
-        alert("Please select any one City");
-        return false;
-    }
-    if (bloodGroup == "-Select-") {
-        alert("Please select any one blood group");
-        return false;
-    }
-
-
-    $('#donorContactNo').bind('keyup paste', function () {
-        this.value = this.value.replace(/[^0-9]/g, '');
-    });
-
-    console.log('searching for donor id:', donorReferenceID);
-    var docRef = db.collection("Donors").doc(donorReferenceID);
-    //var o = {};
+    //console.log('searching for donor id:', donorReferenceID);
+    var docRef = db.collection("Donors").doc(donor.donorDetails.donorReferenceID);
     docRef.get().then(function (thisDoc) {
         if (thisDoc.exists) {
             console.log('user exisits, updating now....', donor);
             docRef.update(donor.donorDetails).then(function () {
-                alert('You have successfully updated your details');
+                //alert('You have successfully updated your details');
                 window.location = './searchDonors.html';
             })
         } else {
@@ -128,7 +96,7 @@ function FireBaseRegisterDonor(donor) {
         console.log(error.message);
         $('#unavailableError').css('display', 'block');
         $('#unavailableError').html(error.message);
-        alert(error.message);
+        //alert(error.message);
     });
 }
 
@@ -155,7 +123,8 @@ function CheckDonorExists(donor) {
             // console.log("searched donors length:", snapshot.docs.length);
             // console.log("searched donors first element:", snapshot.docs[0]);
             if (snapshot.docs.length === 0) {
-                PopulateDonorUIDetails(donor.donorDetails.DonorName,
+                donor.donorDetails.donorReferenceID = '0';
+                PopulateDonorUIDetails(donor.donorDetails.donorReferenceID, donor.donorDetails.DonorName,
                     null,
                     null,
                     donor.donorDetails.ContactNo,
@@ -167,16 +136,18 @@ function CheckDonorExists(donor) {
             } else {
                 snapshot.forEach(function (doc) {
                     console.log("id from firestore", doc.id);
-                    donorReferenceID = doc.id;
+                    donor.donorDetails.donorReferenceID = doc.id;
                     donor.RegisterDonor();
                     //console.log('LastDonatedDate:', doc.data().LastDonatedDate);
-                    PopulateDonorUIDetails(doc.data().DonorName.trim(),
+                    PopulateDonorUIDetails(doc.id, doc.data().DonorName.trim(),
                         doc.data().State.trim(),
                         doc.data().City.trim(),
                         doc.data().ContactNo.trim(),
                         doc.data().Email.trim(),
                         doc.data().BloodGroup.trim(),
-                        (doc.data().LastDonatedDate)
+                        doc.data().NeverDonated,
+                        (doc.data().LastDonatedDate),
+                        doc.data().DontDonate
                     );
                     document.getElementById('registerFormLoading').style.display = 'none';
                 });

@@ -11,6 +11,12 @@
     text-align: center;
 }
 
+.spinner-border {
+	display: inline-block;
+	width: 5rem;
+	height: 5rem;
+}
+
 .navbar-toggler {
     padding: 7px 5px 0px !important;
     border: 1px solid #ddd !important;
@@ -149,4 +155,12 @@
     bottom: 0;
     width: 100%;
     text-align: center;
+}
+
+.footer{
+    position: fixed !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
 }

@@ -22,6 +22,88 @@
     <script src="./js/init-firebase.js"></script>
     <script src="./js/init_login.js"></script>
     <script src="./js/registerDonor.js"></script>
+    <style>
+        #snackbarName,
+        #snackbarbG,
+        #snackbarMb,
+        #snackbarCity,
+        #snackbarState,
+        #snackbarEi,
+        #snackbarDonateDetails,
+        #unavailableError {
+            visibility: hidden;
+            min-width: 150px;
+            margin-left: -125px;
+            background-color: red;
+            color: black;
+            text-align: center;
+            border-radius: 2px;
+            font-size: 17px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #snackbarName.show,
+        #snackbarbG.show,
+        #snackbarMb.show,
+        #snackbarCity.show,
+        #snackbarState.show,
+        #snackbarEi.show,
+        #snackbarDonateDetails.show,
+        #unavailableError.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -47,7 +129,15 @@
             </div>
         </nav>
 
-        <div class="register">
+        <!-- //loader start -->
+        <div id="loaded" class="text-center d-none" style="margin: 10%">
+            <div class="spinner-border text-danger" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- end here -->
+
+        <div class="register" style="margin-bottom: 3%;">
             <div class="row">
                 <div class="col-md-3 register-left">
                     <i class="fa fa-handshake-o fa-4x"></i>
@@ -92,36 +182,37 @@
                                     <div class="row form-group">
                                         <div class="col-md-4">
                                             <label for="donorName">Name:</label>
-                                            <input class="form-control" id="donorName" placeholder="Enter your Name"
-                                                minlength="3" maxlength="24" required>
+                                            <input class="form-control" id="donorName" placeholder="Enter your Name">
+                                            <div id="snackbarName">Name should be minimum 5 characters</div>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="donorContactNo">Contact Number:</label>
                                             <input class="form-control" type="text" id="donorContactNo" maxlength="10"
-                                                placeholder="Enter your Contact No" required>
+                                                placeholder="Enter your Contact No">
+                                            <div id="snackbarMb">Mobile number should be min 5 digits</div>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="donorEmail">Enter your Email:</label>
                                             <input class="form-control" id="donorEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter your email" required>
-                                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                                placeholder="Enter your email">
+                                            <div id="snackbarEi">Please enter valid email id</div>
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label for="states">Select Your State:</label>
-                                            <select id="states" name="states" class="form-control" required></select>
+                                            <select id="states" name="states" class="form-control"></select>
+                                            <div id="snackbarState">Please select state</div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label for="cities">Select Your City:</label>
-                                            <select id="cities" name="cities" class="form-control" required></select>
+                                            <select id="cities" name="cities" class="form-control"></select>
+                                            <div id="snackbarCity">Please select City</div>
                                         </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label for="bloodGroup">Select Your Blood Group:</label>
-                                            <select id="bloodGroup" name="bloodGroup" class="form-control" required>
-                                                <option value="Select">-Select-</option>
+                                            <select id="bloodGroup" name="bloodGroup" class="form-control">
+                                                <option value="Select">--Select Blood Group--</option>
                                                 <option value="A+">A+</option>
                                                 <option value="B+">B+</option>
                                                 <option value="AB+">AB+</option>
@@ -131,26 +222,51 @@
                                                 <option value="AB-">AB-</option>
                                                 <option value="O-">O-</option>
                                             </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="donationOn">Last Donated Blood on:</label>
-                                            <input class="form-control" id="donationOn" required type="date"
-                                                name="donationOn" aria-describedby="emailHelp"
-                                                placeholder="(YYYY-MM-DD)Provide date on which you donated blood last time">
-                                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                            <div id="snackbarbG">Please select blood group</div>
                                         </div>
                                     </div>
+                                    <fieldset class="row form-group">
+                                        <legend class="col-form-label col-md-3 pt-2">Blood Donation Details:
+                                        </legend>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                    id="gridRadios1" value="option1" checked>
+                                                <label class="form-check-label" for="gridRadios1">
+                                                    Never Donated
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                    id="gridRadios2" value="Last Donated Blood on">
+                                                <label class="form-check-label" for="gridRadios2">
+                                                    Last Donated Blood on:
+                                                </label>
+                                                <input class="form-control" id="donationOn" type="date"
+                                                    name="donationOn" aria-describedby="emailHelp"
+                                                    placeholder="(YYYY-MM-DD)Provide date on which you donated blood last time"
+                                                    disabled>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                    id="gridRadios3" value="option3">
+                                                <label class="form-check-label" for="gridRadios3">
+                                                    You Wish Not to Donate Blood
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" id="snackbarDonateDetails">Your Blood Donation Details
+                                        </div>
+                                    </fieldset>
                                     <button id="register" type="submit" class="btn btn-primary mt-2"><i
                                             class="fa fa-user-plus" aria-hidden="true"></i>
                                         Register</button>
                                     <div id="registerLoading" style="display: none;">
-                                        <img style="width: 50px; height: 50px;" src="./assets/images/loading.gif"
-                                            alt="logo">
+                                        <img style="width: 50%; height: 50%; position: relative; left: 20%; top: 50%;"
+                                            src="./assets/images/loading.gif" alt="logo">
                                     </div>
-                                    <div id="unavailableError" style="color: red; font-size:larger">
-                                    </div>
+                                    <div id="unavailableError">Some Unexpecter error occured, Please refresh!!</div>
                                 </form>
-                                <!--</fieldset>-->
                             </div>
                         </div>
                     </div>
@@ -158,7 +274,11 @@
             </div>
         </div>
     </div>
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <footer id="sticky-footer" class="py-3 bg-dark text-white-50 footer" style="position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;">
         <div class="container text-center">
             <small>Copyright &copy; 2019 All India Payam-E-Insaniyat Forum</small>
         </div>
