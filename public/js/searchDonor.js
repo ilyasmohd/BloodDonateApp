@@ -1,5 +1,11 @@
 $(document).ready(function () {
-
+    if (new URLSearchParams(window.location.search).has('mobileUser') == true) {
+        $('.WebUser').css('display', 'none');
+        $('.MobileUser').css('display', 'block');
+    } else {
+        $('.WebUser').css('display', 'block');
+        $('.MobileUser').css('display', 'none');
+    }
     class SearchDonor {
         constructor() {
             this.donorDetails = {

@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    if (new URLSearchParams(window.location.search).has('mobileUser') == true) {
+        $('.WebUser').css('display', 'none');
+        $('.MobileUser').css('display', 'block');
+    } else {
+        $('.WebUser').css('display', 'block');
+        $('.MobileUser').css('display', 'none');
+    }
     let stateElement = document.getElementById("states");
     let cityElement = document.getElementById("cities");
     state_arr.forEach((element, index) => {
