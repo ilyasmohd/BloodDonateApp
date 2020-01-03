@@ -96,7 +96,7 @@ function FireBaseRegisterDonor(donor) {
         console.log(error.message);
         $('#unavailableError').css('display', 'block');
         $('#unavailableError').html(error.message);
-        //alert(error.message);
+        alert(error.message);
     });
 }
 
