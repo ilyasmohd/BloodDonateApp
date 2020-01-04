@@ -1,8 +1,10 @@
 $(document).ready(function () {
     if (new URLSearchParams(window.location.search).has('mobileUser') == true) {
+        //console.log('test1');
         $('.WebUser').css('display', 'none');
         $('.MobileUser').css('display', 'block');
     } else {
+        //console.log('test2');
         $('.WebUser').css('display', 'block');
         $('.MobileUser').css('display', 'none');
     }
