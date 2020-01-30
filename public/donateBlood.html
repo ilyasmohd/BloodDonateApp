@@ -31,19 +31,16 @@
         #snackbarEi,
         #snackbarDonateDetails,
         #unavailableError {
-            visibility: hidden;
-            min-width: 150px;
-            margin-left: -125px;
-            background-color: red;
-            color: black;
-            text-align: center;
+            display: none;
+            color: red;
+            /* text-align: center; */
             border-radius: 2px;
-            font-size: 17px;
+            font-size: 12px;
             padding: 0px;
             margin: 0px;
         }
 
-        #snackbarName.show,
+        /* #snackbarName.show,
         #snackbarbG.show,
         #snackbarMb.show,
         #snackbarCity.show,
@@ -51,7 +48,7 @@
         #snackbarEi.show,
         #snackbarDonateDetails.show,
         #unavailableError.show {
-            visibility: visible;
+            display: block;
             -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
             animation: fadein 0.5s, fadeout 0.5s 2.5s;
         }
@@ -102,193 +99,261 @@
                 bottom: 0;
                 opacity: 0;
             }
-        }
+        } */
     </style>
 </head>
 
 <body>
-    <div class="">
-        <nav class="navbar navbar-expand-xl">
-            <a class="navbar-brand" style="color: #000;" href="#">
-                <img style="width: 130px; height: 120px;" src="./assets/logo.png" alt="logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentXL"
-                aria-controls="navbarSupportedContentXL" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon fa fa-bars"></span>
+    <div id="wrapper">
+        <div class="overlay"></div>
+
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <div class="sidebar-header">
+                    <div class="sidebar-brand">
+                        <a href="#">AIPF</a>
+                    </div>
+                </div>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="./aboutUS.html">About</a>
+                </li>
+                <li>
+                    <a href="./searchDonors.html">Search Blood Donors</a>
+                </li>
+                <li>
+                    <a href="#">Donate Blood</a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
-                <ul class="navbar-nav ml-auto">
-                    <li  class="nav-item">
-                        <a class="nav-link text-dark" href="./aboutUS.html">About Us</a>
-                    </li>
-                    <li class="nav-item WebUser">
-                        <a class="nav-link text-dark" href="./searchDonors.html">Search Blood Donors</a>
-                    </li>
-                    <li class="nav-item MobileUser">
-                        <a class="nav-link text-dark" href="./searchDonors.html?mobileUser=true">Search Blood Donors</a>
-                    </li>
-                    <li class="nav-item WebUser active">
-                        <a class="nav-link" href="./donateBlood.html">Donate Blood</a>
-                    </li>
-                    <li class="nav-item MobileUser active">
-                        <a class="nav-link" href="./donateBlood.html?mobileUser=true">Donate Blood</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+            <div class="container mt-2">
+                <nav class="navbar navbar-expand-xl">
+                    <a class="navbar-brand" style="color: #000;" href="./searchDonors.html">
+                        <img style="width: 100px; height: 100px;" src="./assets/logo.png" alt="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentXL" aria-controls="navbarSupportedContentXL"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon fa fa-bars"></span>
+                    </button>
 
-        <!-- //loader start -->
-        <div id="loaded" class="text-center d-none" style="margin: 10%">
-            <div class="spinner-border text-danger" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- end here -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item" class="nav-item ">
+                                <a class="nav-link text-dark" href="#">Home</a>
+                            </li>
+                            <li class="nav-item" class="nav-item ">
+                                <a class="nav-link  text-dark " href="./aboutUS.html">About Us</a>
+                            </li>
+                            <li class="nav-item" class="nav-item">
+                                <a class="nav-link text-dark " href="./searchDonors.html">Search Blood Donors</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Donate Blood</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- /#sidebar-wrapper -->
 
-        <div class="register">
-            <div class="row">
-                <div class="col-md-3 register-left">
-                    <i class="fa fa-handshake-o fa-4x"></i>
-                    <h3>Welcome To</h3>
-                    <p>All India Payam-E-Insaniyat Forum</p>
-                    <br />
+
+                <!-- //loader start -->
+                <div id="loaded" class="text-center d-none" style="margin: 10%">
+                    <div class="spinner-border text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
-                <div class="col-md-9 register-right">
-                    <div id="container" class=" text-center">
-                        <div id="loading" style="margin-top: 12%">
-                            <img style="width: 100px; height: 100px;" src="./assets/images/loading.gif" alt="logo">
+                <!-- end here -->
+
+                <div class="register my-2">
+                    <div class="row">
+                        <div class="col-md-3 register-left">
+                            <img style="width: 70px; height:70px;" src="./assets/images/handshake.png" alt="logo">
+                            <h3>Welcome To</h3>
+                            <p>All India Payam-E-Insaniyat Forum</p>
+                            <br />
                         </div>
-                        <div id="loaded" class="hidden">
-                            <div id="main">
-                                <div id="user-signed-in" class="hidden">
-                                    <div id="user-info">
+                        <div class="col-md-9 register-right">
+                            <div id="container" class=" text-center">
+                                <div id="loading" style="margin-top: 12%">
+                                        <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
                                     </div>
-                                </div>
-                                <div id="user-signed-out" class="hidden">
-                                    <!-- <h4>You are signed out.</h4> -->
-                                    <div id="firebaseui-spa">
-                                        <h5 class="text-danger m-4">You have to register before you can Donate Blood,
-                                            You can login by one of below options:
-                                        </h5>
-                                        <div id="firebaseui-container"></div>
+                                <div id="loaded" class="hidden">
+                                    <div id="main">
+                                        <div id="user-signed-in" class="hidden">
+                                            <div id="user-info">
+                                            </div>
+                                        </div>
+                                        <div id="user-signed-out" class="hidden">
+                                            <!-- <h4>You are signed out.</h4> -->
+                                            <div id="firebaseui-spa">
+                                                <h5 class="text-danger m-4">You have to register before you can Donate Blood, You can login by one of
+                                                    below options:
+                                                </h5>
+                                                <div id="firebaseui-container"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <h3 class="register-heading">Register yourself as Donor</h3>
-                            <div class="row register-form" id="register-donor">
-                                <!--<fieldset>-->
-                                <form id="registerDonor" style="width:100%">
-                                    <div class="row loading" id="registerFormLoading">
-                                        <img class="" style="width: 100px; height: 100px;"
-                                            src="./assets/images/loading.gif" alt="logo">
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-4">
-                                            <label for="donorName">Name:</label>
-                                            <input class="form-control" id="donorName" placeholder="Enter your Name">
-                                            <div id="snackbarName">Name should be minimum 5 characters</div>
+                            <div class="tab-content" id="myTabContent">
+                                    <div class="col loading text-center" id="registerFormLoading">
+                                            <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="donorContactNo">Contact Number:</label>
-                                            <input class="form-control" type="text" id="donorContactNo"
-                                                placeholder="Enter your Contact No">
-                                            <div id="snackbarMb">Mobile number should be min 5 digits</div>
-                                        </div>
-                                        <div class="col-md-4">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <h3 class="register-heading">Donor Registration</h3>
+                                    <div class="row register-form" id="register-donor">
+                                        <!--<fieldset>-->
+                                        <form id="registerDonor" style="width:100%">
+                                            <div class="row ">
+                                                <div class="col-md-4 form-group">
+                                                    <label for="donorName">Name:</label>
+                                                    <input class="form-control" id="donorName" placeholder="Enter your Name">
+                                                    <small class="text-danger" id="snackbarName">Name should be minimum 5 characters</small>
+                                                </div>
+                                                <div class="col-md-4 form-group">
+                                                    <label for="donorContactNo">Contact Number:</label>
+                                                    <input class="form-control" type="text" id="donorContactNo" placeholder="Enter your Contact No">
+                                                    <small class="text-danger" id="snackbarMb">Mobile number should be min 5 digits</small>
+                                                </div>
+                                                <!-- <div class="col-md-4">
                                             <label for="donorEmail">Enter your Email:</label>
                                             <input class="form-control" id="donorEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter your email">
                                             <div id="snackbarEi">Please enter valid email id</div>
+                                        </div> -->
+                                                <div class="col-md-4 form-group">
+                                                    <label for="states">Select Your State:</label>
+                                                    <select id="states" name="states" class="form-control"></select>
+                                                    <small class="text-danger" id="snackbarState">Please select state</small>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+
+                                                <div class="col-md-4 form-group">
+                                                    <label for="cities">Select Your City:</label>
+                                                    <select id="cities" name="cities" class="form-control"></select>
+                                                    <small class="text-danger" id="snackbarCity">Please select City</small>
+                                                </div>
+                                                <div class="col-md-4 form-group">
+                                                    <label for="bloodGroup">Select Your Blood Group:</label>
+                                                    <select id="bloodGroup" name="bloodGroup" class="form-control">
+                                                        <option value="Select">--Select Blood Group--</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="AB-">AB-</option>
+                                                        <option value="O-">O-</option>
+                                                    </select>
+                                                    <small class="text-danger" id="snackbarbG">Please select blood group</small>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <b class="col-form-label pt-3">Blood Donation Details:
+                                                </b>
+                                                <div class="row">
+                                                    <div class="col-md-4 form-group">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                                            <label class="form-check-label" for="gridRadios1">
+                                                                Never Donated
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 form-group">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Last Donated Blood on">
+                                                            <label class="form-check-label" for="gridRadios2">
+                                                                Last Donated Blood on:
+                                                            </label>
+                                                            <input class="form-control" id="donationOn" type="date" name="donationOn" aria-describedby="emailHelp" placeholder="(YYYY-MM-DD)Provide date on which you donated blood last time"
+                                                                disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 form-group">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                                            <label class="form-check-label" for="gridRadios3">
+                                                                You Wish Not to Donate Blood
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=" form-group">
+                                                    <button id="register" type="submit" class="btn btn-primary mt-2">
+                                                        Register</button>
+                                                    <div class="col-md-12" id="snackbarDonateDetails">Your Blood Donation Details
+                                                    </div>
+                                                    <div id="registerLoading" style="display: none;">
+                                                        <img style="width: 50%; height: 50%; position: relative; left: 20%; top: 50%;" src="./assets/images/loading.gif" alt="logo">
+                                                    </div>
+                                                    <div id="unavailableError">Some Unexpecter error occured, Please refresh!!</div>
+                                                </div>
+                                        </form>
                                         </div>
                                     </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-4">
-                                            <label for="states">Select Your State:</label>
-                                            <select id="states" name="states" class="form-control"></select>
-                                            <div id="snackbarState">Please select state</div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="cities">Select Your City:</label>
-                                            <select id="cities" name="cities" class="form-control"></select>
-                                            <div id="snackbarCity">Please select City</div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="bloodGroup">Select Your Blood Group:</label>
-                                            <select id="bloodGroup" name="bloodGroup" class="form-control">
-                                                <option value="Select">--Select Blood Group--</option>
-                                                <option value="A+">A+</option>
-                                                <option value="B+">B+</option>
-                                                <option value="AB+">AB+</option>
-                                                <option value="O+">O+</option>
-                                                <option value="A-">A-</option>
-                                                <option value="B-">B-</option>
-                                                <option value="AB-">AB-</option>
-                                                <option value="O-">O-</option>
-                                            </select>
-                                            <div id="snackbarbG">Please select blood group</div>
-                                        </div>
-                                    </div>
-                                    <fieldset class="row form-group">
-                                        <legend class="col-form-label col-md-3 pt-2">Blood Donation Details:
-                                        </legend>
-                                        <div class="col-md-4">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios1" value="option1" checked>
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    Never Donated
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios2" value="Last Donated Blood on">
-                                                <label class="form-check-label" for="gridRadios2">
-                                                    Last Donated Blood on:
-                                                </label>
-                                                <input class="form-control" id="donationOn" type="date"
-                                                    name="donationOn" aria-describedby="emailHelp"
-                                                    placeholder="(YYYY-MM-DD)Provide date on which you donated blood last time"
-                                                    disabled>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios3" value="option3">
-                                                <label class="form-check-label" for="gridRadios3">
-                                                    You Wish Not to Donate Blood
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4" id="snackbarDonateDetails">Your Blood Donation Details
-                                        </div>
-                                    </fieldset>
-                                    <button id="register" type="submit" class="btn btn-primary mt-2"><i
-                                            class="fa fa-user-plus" aria-hidden="true"></i>
-                                        Register</button>
-                                    <div id="registerLoading" style="display: none;">
-                                        <img style="width: 50%; height: 50%; position: relative; left: 20%; top: 50%;"
-                                            src="./assets/images/loading.gif" alt="logo">
-                                    </div>
-                                    <div id="unavailableError">Some Unexpecter error occured, Please refresh!!</div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <footer id="sticky-footer" class="py-3 bg-dark text-white-50">
-        <div class="container text-center">
-            <small>Copyright &copy; 2019 All India Payam-E-Insaniyat Forum</small>
-        </div>
-    </footer>
-
+                <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+                    <div class="container-fluid text-center">
+                        <span>Copyright &copy; 2019 All India Payam-E-Insaniyat Forum</span>
+                    </div>
+                </footer>
 </body>
+<script src="./js/jquery.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/tether.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var trigger = $('.hamburger'),
+            overlay = $('.overlay'),
+            isClosed = false;
+
+        trigger.click(function () {
+            hamburger_cross();
+        });
+
+        function hamburger_cross() {
+
+            if (isClosed == true) {
+                overlay.hide();
+                trigger.removeClass('is-open');
+                trigger.addClass('is-closed');
+                isClosed = false;
+            } else {
+                overlay.show();
+                trigger.removeClass('is-closed');
+                trigger.addClass('is-open');
+                isClosed = true;
+            }
+        }
+
+        $('[data-toggle="offcanvas"]').click(function () {
+            $('#wrapper').toggleClass('toggled');
+        });
+    });
+</script>
 
 </html>

@@ -40,16 +40,34 @@ function FireBaseSearchDonors(donor) {
                     //console.log(doc.id, '=>', doc.data());
                     console.log(doc.data().LastDonatedDate);
                     if (doc.data().DontDonate != true) {
-                        $('#DonorsTable > tbody:last-child').append(`
-                            <tr>
-                            <td>${++index}</td>
-                            <td>${doc.data().BloodGroup}</td>
-                            <td>${doc.data().DonorName}</td>
-                            <td>${doc.data().State}, ${doc.data().City}</td>
-                            <td>${doc.data().ContactNo}</td>
-                            <td>${doc.data().Email}</td>
-                            <td>${doc.data().LastDonatedDate == '1900-01-01'? 'Never Donated':new Date((doc.data().LastDonatedDate)).toDateString()}</td>
-                            </tr>`);
+                        $('#DonorsTable > tbody:last-child').append(
+                            `<tr><td>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <b>Donor No: </b>${++index}
+                                            <br>
+                                            <b>Donar Name: </b>${doc.data().DonorName}
+                                            <br>
+                                            <b>Cotact Number: </b>${doc.data().ContactNo}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Email: </b>${doc.data().Email}
+                                            <br>
+                                            <b>Location: </b>${doc.data().State}, ${doc.data().City}
+                                        </div>
+                                        <div class="col-md-5">
+                                            <b>Blood Type: </b>${doc.data().BloodGroup}
+                                            <br>
+                                            <!--<b>Available: </b>mol
+                                            <br>-->
+                                            <b>Last Donated on:</b>${doc.data().LastDonatedDate == '1900-01-01'? 'Never Donated':new Date((doc.data().LastDonatedDate)).toDateString()}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </td></tr>`);
                     }
                 });
             }
