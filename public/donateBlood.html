@@ -39,67 +39,6 @@
             padding: 0px;
             margin: 0px;
         }
-
-        /* #snackbarName.show,
-        #snackbarbG.show,
-        #snackbarMb.show,
-        #snackbarCity.show,
-        #snackbarState.show,
-        #snackbarEi.show,
-        #snackbarDonateDetails.show,
-        #unavailableError.show {
-            display: block;
-            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-
-        @-webkit-keyframes fadein {
-            from {
-                bottom: 0;
-                opacity: 0;
-            }
-
-            to {
-                bottom: 30px;
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadein {
-            from {
-                bottom: 0;
-                opacity: 0;
-            }
-
-            to {
-                bottom: 30px;
-                opacity: 1;
-            }
-        }
-
-        @-webkit-keyframes fadeout {
-            from {
-                bottom: 30px;
-                opacity: 1;
-            }
-
-            to {
-                bottom: 0;
-                opacity: 0;
-            }
-        }
-
-        @keyframes fadeout {
-            from {
-                bottom: 30px;
-                opacity: 1;
-            }
-
-            to {
-                bottom: 0;
-                opacity: 0;
-            }
-        } */
     </style>
 </head>
 
@@ -112,20 +51,24 @@
             <ul class="nav sidebar-nav">
                 <div class="sidebar-header">
                     <div class="sidebar-brand">
-                        <a href="#">AIPF</a>
+                        <a href="#"><i class="fa fa-handshake-o"></i> AIPF</a>
                     </div>
                 </div>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="./searchDonors.html">
+                        <i class="fa fa-home"></i> Home</a>
                 </li>
                 <li>
-                    <a href="./aboutUS.html">About</a>
+                    <a href="./aboutUS.html">
+                        <i class="fa fa-info"></i> About</a>
                 </li>
                 <li>
-                    <a href="./searchDonors.html">Search Blood Donors</a>
+                    <a href="./searchDonors.html">
+                        <i class="fa fa-search"></i> Search Blood Donors</a>
                 </li>
                 <li>
-                    <a href="#">Donate Blood</a>
+                    <a href="#">
+                        <i class="fa fa-tint"></i> Donate Blood</a>
                 </li>
 
             </ul>
@@ -143,7 +86,7 @@
             <div class="container mt-2">
                 <nav class="navbar navbar-expand-xl">
                     <a class="navbar-brand" style="color: #000;" href="./searchDonors.html">
-                        <img style="width: 100px; height: 100px;" src="./assets/logo.png" alt="logo">
+                        <img style="width: 120px; height: 120px;" src="./assets/logo.png" alt="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentXL" aria-controls="navbarSupportedContentXL"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -153,16 +96,20 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item" class="nav-item ">
-                                <a class="nav-link text-dark" href="#">Home</a>
+                                <a class="nav-link text-dark" href="#">
+                                    <i class="fa fa-home"></i> Home</a>
                             </li>
                             <li class="nav-item" class="nav-item ">
-                                <a class="nav-link  text-dark " href="./aboutUS.html">About Us</a>
+                                <a class="nav-link  text-dark " href="./aboutUS.html">
+                                    <i class="fa fa-info"></i> About Us</a>
                             </li>
                             <li class="nav-item" class="nav-item">
-                                <a class="nav-link text-dark " href="./searchDonors.html">Search Blood Donors</a>
+                                <a class="nav-link text-dark " href="./searchDonors.html">
+                                    <i class="fa fa-search"></i> Search Blood Donors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Donate Blood</a>
+                                <a class="nav-link active" href="#">
+                                    <i class="fa fa-tint"></i> Donate Blood</a>
                             </li>
                         </ul>
                     </div>
@@ -189,8 +136,8 @@
                         <div class="col-md-9 register-right">
                             <div id="container" class=" text-center">
                                 <div id="loading" style="margin-top: 12%">
-                                        <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
-                                    </div>
+                                    <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
+                                </div>
                                 <div id="loaded" class="hidden">
                                     <div id="main">
                                         <div id="user-signed-in" class="hidden">
@@ -200,8 +147,7 @@
                                         <div id="user-signed-out" class="hidden">
                                             <!-- <h4>You are signed out.</h4> -->
                                             <div id="firebaseui-spa">
-                                                <h5 class="text-danger m-4">You have to register before you can Donate Blood, You can login by one of
-                                                    below options:
+                                                <h5 class="text-danger m-4">Donor Registration!
                                                 </h5>
                                                 <div id="firebaseui-container"></div>
                                             </div>
@@ -211,9 +157,9 @@
                             </div>
 
                             <div class="tab-content" id="myTabContent">
-                                    <div class="col loading text-center" id="registerFormLoading">
-                                            <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
-                                        </div>
+                                <div class="col loading text-center" id="registerFormLoading">
+                                    <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
+                                </div>
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <h3 class="register-heading">Donor Registration</h3>
                                     <div class="row register-form" id="register-donor">
@@ -291,7 +237,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
                                                             <label class="form-check-label" for="gridRadios3">
-                                                                You Wish Not to Donate Blood
+                                                                You Wish Not to Donate Blood<cite><br>(Your details will not be shown in search results)</cite>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -315,11 +261,11 @@
                     </div>
                 </div>
             </div>
-                <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-                    <div class="container-fluid text-center">
-                        <span>Copyright &copy; 2019 All India Payam-E-Insaniyat Forum</span>
-                    </div>
-                </footer>
+            <footer id="" class="py-4 bg-dark text-white-50">
+                <div class="container-fluid text-center">
+                    <span>Copyright &copy; 2020 All India Payam-E-Insaniyat Forum</span>
+                </div>
+            </footer>
 </body>
 <script src="./js/jquery.js"></script>
 <script src="./js/bootstrap.js"></script>

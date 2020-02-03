@@ -57,12 +57,13 @@ $(document).ready(function () {
 
     $('#registerDonor').on('submit', function (e) {
         e.preventDefault();
-        var emailRegex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        //var emailRegex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
         //check Validation Errors
         registerDonorObj.donorDetails.DonorName = $('#donorName').val();
         registerDonorObj.donorDetails.ContactNo = $('#donorContactNo').val();
-        registerDonorObj.donorDetails.Email = $('#donorEmail').val();
+        //registerDonorObj.donorDetails.Email = $('#donorEmail').val();
+        registerDonorObj.donorDetails.Email = '';
         registerDonorObj.donorDetails.State = $('#states :selected').text();
         registerDonorObj.donorDetails.City = $('#cities :selected').text();
         registerDonorObj.donorDetails.BloodGroup = $('#bloodGroup :selected').text();
@@ -86,6 +87,7 @@ $(document).ready(function () {
             }, 3000);
             return false;
         }
+        /*
         if (!emailRegex.test(registerDonorObj.donorDetails.Email)) {
             let ei = document.getElementById("snackbarEi");
             ei.className = "show";
@@ -94,6 +96,7 @@ $(document).ready(function () {
             }, 3000);
             return false;
         }
+        */
         if (registerDonorObj.donorDetails.State === "--Select State--") {
             let bG = document.getElementById("snackbarState");
             bG.className = "show";

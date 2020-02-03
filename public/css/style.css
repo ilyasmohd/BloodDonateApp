@@ -141,6 +141,9 @@ background-image: url(../assets/images/about-img.png);
 font-weight: 500 !important;
 font-size: 24px !important;
     }
+    #page-content-wrapper {
+        height: 88vh !important;
+    }
 }
 .nav-link.active{
 background: #fff;
@@ -180,6 +183,7 @@ text-align: center !important;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
 .card{
+    margin-bottom: 15px;
 box-shadow:  0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12) !important;
 }
 body {
@@ -518,12 +522,48 @@ display: block;
 
 /* Landscape phone to portrait tablet  show the button */
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
 
 .navbar-toggler {
     display: none;
 }
 .navbar-brand{
-    padding-left:12% !important;
+    padding-left:10% !important;
 }
+#page-content-wrapper {
+    height: 94vh !important;
+}
+}
+.nav-item a, .white {
+color: #fff !important;
+}
+.nav-item .active{
+    color: #0062cc !important;
+}
+.nav-item .active:hover{
+    color: #000000 !important;
+}
+.nav-item a:hover{
+    color: #0062cc !important;
+    }
+    /* #page-content-wrapper {
+        height: 93vh;
+    } */
+
+#DonorsTable td{
+     width: 70% !important;
+}
+.blood-style{
+    background: #fe616a;
+    border: 1px solid indianred;
+    text-align: center;
+    width: 69%;
+    border-radius: 50px;
+    padding: 0px;
+    color: #fff;
+}
+#sticky-footer{
+    position: fixed;
+bottom: 0;
+width: 100%;
 }

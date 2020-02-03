@@ -41,28 +41,29 @@ function FireBaseSearchDonors(donor) {
                     console.log(doc.data().LastDonatedDate);
                     if (doc.data().DontDonate != true) {
                         $('#DonorsTable > tbody:last-child').append(
-                            `<tr><td>
+                            `<tr><td class="width:75%">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <b>Donor No: </b>${++index}
+                                        <div class="col-md-4 py-1">
+                                            <b>Donor No: </b>#${++index}
                                             <br>
-                                            <b>Donar Name: </b>${doc.data().DonorName}
-                                            <br>
-                                            <b>Cotact Number: </b>${doc.data().ContactNo}
+                                            <b>Donor Name: </b>${doc.data().DonorName}
+                                            
                                         </div>
-                                        <div class="col-md-4">
-                                            <b>Email: </b>${doc.data().Email}
+                                        <div class="col-md-5 py-1">
+                                           <!--<b>Email: </b>${doc.data().Email} -->
+                                            <b>Contact No: </b>${doc.data().ContactNo}
                                             <br>
                                             <b>Location: </b>${doc.data().State}, ${doc.data().City}
                                         </div>
-                                        <div class="col-md-5">
-                                            <b>Blood Type: </b>${doc.data().BloodGroup}
-                                            <br>
+                                        <div class="col-md-3 py-1">
+                                        <div class="blood-style">
+                                            <b>Blood Group:</b>
+                                            ${doc.data().BloodGroup}</div>
                                             <!--<b>Available: </b>mol
-                                            <br>-->
-                                            <b>Last Donated on:</b>${doc.data().LastDonatedDate == '1900-01-01'? 'Never Donated':new Date((doc.data().LastDonatedDate)).toDateString()}
+                                            <br>
+                                            <b>Last Donated on:</b>${doc.data().LastDonatedDate == '1900-01-01'? 'Never Donated':new Date((doc.data().LastDonatedDate)).toDateString()} -->
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +85,7 @@ function FireBaseSearchDonors(donor) {
 
 function FireBaseRegisterDonor(donor) {
     //document.getElementById('registerFormLoading').style.display = 'block';
-    $('#registerFormLoading').css('display', 'block');
+    $('#registerFormLoading').css('display', 'none');
     $('#unavailableError').css('display', 'none');
     //console.log('searching for donor id:', donorReferenceID);
     var docRef = db.collection("Donors").doc(donor.donorDetails.donorReferenceID);

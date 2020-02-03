@@ -23,20 +23,24 @@
             <ul class="nav sidebar-nav">
                 <div class="sidebar-header">
                     <div class="sidebar-brand">
-                        <a href="#">AIPF</a>
+                        <a href="#"><i class="fa fa-handshake-o"></i> AIPF</a>
                     </div>
                 </div>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="./searchDonors.html">
+                        <i class="fa fa-home"></i> Home</a>
                 </li>
                 <li>
-                    <a href="./aboutUS.html">About</a>
+                    <a href="./aboutUS.html">
+                        <i class="fa fa-info"></i> About</a>
                 </li>
                 <li>
-                    <a href="#">Search Blood Donors</a>
+                    <a href="#">
+                        <i class="fa fa-search"></i> Search Blood Donors</a>
                 </li>
                 <li>
-                    <a href="./donateBlood.html">Donate Blood</a>
+                    <a href="./donateBlood.html">
+                        <i class="fa fa-tint"></i> Donate Blood</a>
                 </li>
 
             </ul>
@@ -66,16 +70,20 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item" class="nav-item ">
-                                <a class="nav-link text-dark" href="#">Home</a>
+                                <a class="nav-link text-dark" href="#">
+                                    <i class="fa fa-home"></i> Home</a>
                             </li>
                             <li class="nav-item" class="nav-item ">
-                                <a class="nav-link text-dark" href="./aboutUS.html">About Us</a>
+                                <a class="nav-link text-dark" href="./aboutUS.html">
+                                    <i class="fa fa-info"></i> About Us</a>
                             </li>
                             <li class="nav-item" class="nav-item">
-                                <a class="nav-link active" href="#">Search Blood Donors</a>
+                                <a class="nav-link active" href="#">
+                                    <i class="fa fa-search"></i> Search Blood Donors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="./donateBlood.html">Donate Blood</a>
+                                <a class="nav-link text-dark" href="./donateBlood.html">
+                                    <i class="fa fa-tint"></i> Donate Blood</a>
                             </li>
                         </ul>
                     </div>
@@ -84,7 +92,7 @@
                     <div class="col loading text-center" id="searchFormLoading" style="display: none;">
                         <img class="" style="width: 150px; height: 150px;" src="./assets/images/loading.gif" alt="logo">
                     </div>
-                    <h3>Search Donors</h3>
+                    <h3 class="white" style="color: #fff">Search Donors</h3>
                     <form id="SearchDonors">
                         <div class=" row">
                             <div class="col-md-3 form-group">
@@ -115,29 +123,33 @@
                             </div>
                         </div>
                     </form>
-                    <div class="">
+                    <div class="mb-5 pb-4">
                         <table id="DonorsTable" style="display: none;">
                             <tbody>
                                 <tr></tr>
                             </tbody>
                         </table>
-                        <div id='noDonorsFound' style="color: red; display: none;">
-                            No Donors Found !!!!
+                        <div id='noDonorsFound' style="text-align: center;
+                        font-size: 29px;
+                        font-weight: bold;padding: 10px;color: red;
+                        background: white;
+                        display: none;">
+                            <i class="fa fa-warning"></i> No Donors Found !!!!
                         </div>
                     </div>
-                    <br>
-                    <br>
                 </div>
             </div>
-            <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-                <div class="container-fluid text-center">
-                    <span>Copyright &copy; 2019 All India Payam-E-Insaniyat Forum</span>
-                </div>
-            </footer>
+
         </div>
         <!-- /#page-content-wrapper -->
-
     </div>
+    <br>
+    </br>
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container-fluid text-center">
+            <span>Copyright &copy; 2020 All India Payam-E-Insaniyat Forum</span>
+        </div>
+    </footer>
 </body>
 <script src="./js/jquery.js"></script>
 <script src="./js/bootstrap.js"></script>
