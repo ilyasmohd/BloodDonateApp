@@ -132,9 +132,9 @@ function CheckDonorExists(donor) {
     if (donor.donorDetails.DonorName != null) {
         query = query.where('DonorName', '==', donor.donorDetails.DonorName);
     }
-    if (donor.donorDetails.Email != null) {
+    /*if (donor.donorDetails.Email != null) {
         query = query.where('Email', '==', donor.donorDetails.Email);
-    }
+    }*/
 
     let index = 0;
     query.get()
