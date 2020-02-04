@@ -49,7 +49,6 @@ function FireBaseSearchDonors(donor) {
                                             <b>Donor No: </b>#${++index}
                                             <br>
                                             <b>Donor Name: </b>${doc.data().DonorName}
-                                            
                                         </div>
                                         <div class="col-md-5 py-1">
                                            <!--<b>Email: </b>${doc.data().Email} -->
@@ -58,12 +57,11 @@ function FireBaseSearchDonors(donor) {
                                             <b>Location: </b>${doc.data().State}, ${doc.data().City}
                                         </div>
                                         <div class="col-md-3 py-1">
-                                        <div class="blood-style">
-                                            <b>Blood Group:</b>
-                                            ${doc.data().BloodGroup}</div>
-                                            <!--<b>Available: </b>mol
-                                            <br>
-                                            <b>Last Donated on:</b>${doc.data().LastDonatedDate == '1900-01-01'? 'Never Donated':new Date((doc.data().LastDonatedDate)).toDateString()} -->
+                                            <div class="blood-style">
+                                            <b>Blood Group: </b>${doc.data().BloodGroup}
+                                            </div>
+                                            <!--<b>Available: </b>mol<br>-->
+                                            <b>Last Donated on: </b>${doc.data().LastDonatedDate == '1900-01-01'? 'Never Donated':new Date((doc.data().LastDonatedDate)).toDateString()} 
                                         </div>
                                     </div>
                                 </div>
