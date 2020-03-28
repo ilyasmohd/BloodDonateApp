@@ -1,0 +1,67 @@
+
+script from firebase below:
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.5.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/7.5.0/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+
+miscelaneous:
+
+https://firebase.google.com/docs/web/setup?authuser=0
+https://firebase.google.com/docs/reference/js/?authuser=0
+https://firebase.google.com/docs/samples/?authuser=0
+https://firebase.google.com/docs/hosting/quickstart?authuser=0
+
+npm install -g firebase-tools
+firebase login
+firebase init
+
+{
+  "hosting": {
+    "site": "donateblooddonatelife",
+    "public": "public",
+    ...
+  }
+}
+
+firebase deploy --only hosting:donateblooddonatelife
+
+https://donateblood-donatelife.firebaseapp.com/searchDonors.html
+https://donateblood-donatelife.web.app/searchDonors.html
+
+const firebaseConfig = {
+  apiKey: "AIzaSyASCzZKt9FvwV6PBJZRQa-OCtf8USpLNsg",
+  authDomain: "donateblood-donatelife.firebaseapp.com",
+  databaseURL: "https://donateblood-donatelife.firebaseio.com",
+  projectId: "donateblood-donatelife",
+  storageBucket: "donateblood-donatelife.appspot.com",
+  messagingSenderId: "417215519552",
+  appId: "1:417215519552:web:08cd0e52ac6d5422f378a5",
+  measurementId: "G-FTKM58R37X"
+};
+
+
+https://codelabs.developers.google.com/codelabs/firebase-web/?authuser=0#8
+
+config.xml sample:
+https://github.com/phonegap/phonegap-start/blob/master/www/config.xml
+
+git hub repo for authentication:
+https://github.com/firebase/quickstart-js/tree/fcf68cb3f0bfc033d536447b65967f4b0567720e/auth
+
+
+
+few important reads:
+http://docs.phonegap.com/en/edge/guide_phonegap-build_index.md.html#Introducing%20PhoneGap%20Build
+http://docs.phonegap.com/tutorials/develop/1-embed-webview/android-with-extension/
+
+
+google publish links:
+https://play.google.com/apps/publish/signup/
