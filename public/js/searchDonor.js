@@ -18,6 +18,7 @@ $(document).ready(function () {
                 ContactNo: '',
                 Email: '',
                 LastDonatedDate: '',
+                BloodDonationOption : ''
             };
         }
         // return `(${this.x}, ${this.y})`;
@@ -44,8 +45,12 @@ $(document).ready(function () {
 
     $('#cities').on('change', function (value, index) {
         // console.log($('#cities :selected').text());
-        searchDonorObj.donorDetails.State = $('#states :selected').text();
-        searchDonorObj.donorDetails.City = $('#cities :selected').text();
+        // searchDonorObj.donorDetails.State = $('#states :selected').text();
+        // searchDonorObj.donorDetails.City = $('#cities :selected').text();
+
+        searchDonorObj.donorDetails.State = +$('#states :selected').val();
+        searchDonorObj.donorDetails.City = +$('#cities :selected').val();
+
     });
 
     $('#bloodGroup').on('change', function (value, index) {

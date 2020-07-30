@@ -19,8 +19,8 @@ function FireBaseSearchDonors(donor) {
     // document.getElementById('searchFormLoading').style.display = 'block';
     $('#searchFormLoading').css('display', 'block');
     $('#unavailableError').css('display', 'none');
-    console.log("searching donors....");
-    //console.log(donor.donorDetails.State, donor.donorDetails.City, donor.donorDetails.BloodGroup); return;
+    //console.log("searching donors....");
+    //console.log('details:', donor.donorDetails.State, donor.donorDetails.City, donor.donorDetails.BloodGroup);
     let query = db.collection('Donors')
         .where('State', '==', donor.donorDetails.State)
         .where('City', '==', donor.donorDetails.City)
@@ -38,7 +38,7 @@ function FireBaseSearchDonors(donor) {
                 $('#DonorsTable tbody').empty();
                 snapshot.forEach(function (doc) {
                     //console.log(doc.id, '=>', doc.data());
-                    console.log(doc.data().LastDonatedDate);
+                    //console.log(doc.data().LastDonatedDate);
                     if (doc.data().DontDonate != true) {
                         $('#DonorsTable > tbody:last-child').append(
                             `<tr><td class="width:75%">
@@ -54,14 +54,14 @@ function FireBaseSearchDonors(donor) {
                                            <!--<b>Email: </b>${doc.data().Email} -->
                                             <b>Contact No: </b>${doc.data().ContactNo}
                                             <br>
-                                            <b>Location: </b>${doc.data().State}, ${doc.data().City}
+                                            <b>Location: </b>${ state_arr[doc.data().State]}, ${city_arr[doc.data().State].split("|")[doc.data().City] }
                                         </div>
                                         <div class="col-md-3 py-1">
                                             <div class="blood-style">
                                             <b>Blood Group: </b>${doc.data().BloodGroup}
                                             </div>
                                             <!--<b>Available: </b>mol<br>-->
-                                            <b>Last Donated on: </b>${doc.data().LastDonatedDate == '1900-01-01'? 'Never Donated':new Date((doc.data().LastDonatedDate)).toDateString()} 
+                                            <b>Last Donated on: </b>${doc.data().BloodDonationOption == 'NeverDonated'? 'NeverDonated': doc.data().LastDonatedDate == '1900-01-01' ? 'Never Donated' : new Date((doc.data().LastDonatedDate)).toDateString()} 
                                         </div>
                                     </div>
                                 </div>
@@ -98,10 +98,10 @@ function FireBaseRegisterDonor(donor) {
             console.log('created new user');
             //docRef.set(donor.donorDetails);
             db.collection("Donors").add(donor.donorDetails).then(function (docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                    //alert('You have successfully registerd as donor');
-                    window.location = './searchDonors.html';
-                })
+                console.log("Document written with ID: ", docRef.id);
+                //alert('You have successfully registerd as donor');
+                window.location = './searchDonors.html';
+            })
                 .catch(function (error) {
                     console.error("Error adding document: ", error);
                     $('#unavailableError').css('display', 'block');
@@ -127,9 +127,9 @@ function CheckDonorExists(donor) {
     if (donor.donorDetails.ContactNo != null) {
         query = query.where('ContactNo', '==', donor.donorDetails.ContactNo);
     }
-    if (donor.donorDetails.DonorName != null) {
-        query = query.where('DonorName', '==', donor.donorDetails.DonorName);
-    }
+    // if (donor.donorDetails.DonorName != null) {
+    //     query = query.where('DonorName', '==', donor.donorDetails.DonorName);
+    // }
     /*if (donor.donorDetails.Email != null) {
         query = query.where('Email', '==', donor.donorDetails.Email);
     }*/
@@ -157,14 +157,13 @@ function CheckDonorExists(donor) {
                     donor.RegisterDonor();
                     //console.log('LastDonatedDate:', doc.data().LastDonatedDate);
                     PopulateDonorUIDetails(doc.id, doc.data().DonorName.trim(),
-                        doc.data().State.trim(),
-                        doc.data().City.trim(),
+                        doc.data().State,
+                        doc.data().City,
                         doc.data().ContactNo.trim(),
                         doc.data().Email.trim(),
                         doc.data().BloodGroup.trim(),
-                        doc.data().NeverDonated,
-                        (doc.data().LastDonatedDate),
-                        doc.data().DontDonate
+                        doc.data().BloodDonationOption.trim(),
+                        (doc.data().LastDonatedDate)
                     );
                     document.getElementById('registerFormLoading').style.display = 'none';
                 });
