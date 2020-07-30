@@ -65,9 +65,9 @@ function getUiConfig() {
                     handleSignedInUser(authResult.user);
                 }
                 if (authResult.additionalUserInfo) {
-                    document.getElementById('is-new-user').textContent =
-                        authResult.additionalUserInfo.isNewUser ?
-                        'New User' : 'Existing User';
+                    //document.getElementById('is-new-user').textContent =
+                    //    authResult.additionalUserInfo.isNewUser ?
+                    //    'New User' : 'Existing User';
                 }
                 // Do not redirect.
                 return false;

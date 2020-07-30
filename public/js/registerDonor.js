@@ -63,22 +63,24 @@ $(document).ready(function () {
         registerDonorObj.donorDetails.DonorName = $('#donorName').val();
         registerDonorObj.donorDetails.ContactNo = $('#donorContactNo').val();
         registerDonorObj.donorDetails.Email = '';
-        registerDonorObj.donorDetails.State = $('#states :selected').val();
-        registerDonorObj.donorDetails.City = $('#cities :selected').val();
+        registerDonorObj.donorDetails.State = +$('#states :selected').val();
+        registerDonorObj.donorDetails.City = +$('#cities :selected').val();
+        //registerDonorObj.donorDetails.State = +registerDonorObj.donorDetails.State;
+        //registerDonorObj.donorDetails.City = +registerDonorObj.donorDetails.City;
         registerDonorObj.donorDetails.BloodGroup = $('#bloodGroup :selected').text();
         //registerDonorObj.donorDetails.NeverDonated = $('#gridRadios1')[0].checked;
         //registerDonorObj.donorDetails.LastDonatedDate = ($('#gridRadios2')[0].checked === true) ? $('#donationOn').val() : '1900-01-01';
 
         if ($('#gridRadios1')[0].checked === true) {
-            registerDonorObj.BloodDonationOption = 'NeverDonated';
+            registerDonorObj.donorDetails.BloodDonationOption = 'NeverDonated';
             registerDonorObj.donorDetails.LastDonatedDate = '1900-01-01';
         }
         else if ($('#gridRadios2')[0].checked === true) {
-            registerDonorObj.BloodDonationOption = 'LastDonatedOn';
+            registerDonorObj.donorDetails.BloodDonationOption = 'LastDonatedOn';
             registerDonorObj.donorDetails.LastDonatedDate = $('#donationOn').val();
         }
         else if ($('#gridRadios3')[0].checked === true) {
-            registerDonorObj.BloodDonationOption = 'NoDonationWish';
+            registerDonorObj.donorDetails.BloodDonationOption = 'NoDonationWish';
             registerDonorObj.donorDetails.LastDonatedDate = '1900-01-01';
         }
 
@@ -146,7 +148,9 @@ $(document).ready(function () {
         }
         //document.getElementById('registerFormLoading').style.display = 'block';
         // return false;
+        console.log('regisgtring donor:', registerDonorObj);
         FireBaseRegisterDonor(registerDonorObj);
+
     });
 
 });
@@ -171,10 +175,10 @@ class RegisterDonor {
             BloodDonationOption: '',
             BloodGroup: '',
             City: 0,
-            ContactNo: string,
-            DonorName: string,
-            Email: string,
-            LastDonatedDate: string,
+            ContactNo: '',
+            DonorName: '',
+            Email: '',
+            LastDonatedDate: '',
             State: 0,
             isRegisteredDonor: false,
         };
@@ -202,7 +206,7 @@ CheckDonor = function (email, displayName, phoneNumber) {
 PopulateDonorUIDetails = function (donorRefID, DonorName, State, City, ContactNo, Email, BloodGroup, BloodDonationOption, LastDonatedDate) {
     let stateIndex = 0;
     let cityIndex = 0;
-    //console.log("DonorName:", DonorName, ",State:", State, ",City:", City, ",ContactNo:", ContactNo, ",Email:", Email, ",BloodGroup:", BloodGroup, ",BloodDonationDate:", BloodDonationDate);
+    //console.log("DonorName:", DonorName, ",State:", State, ",City:", City, ",ContactNo:", ContactNo, ",Email:", Email, ",BloodGroup:", BloodGroup, ",BloodDonationDate:", LastDonatedDate);
 
     if (DonorName != null && DonorName != '') {
         $('#donorName').attr('readonly', true);
@@ -226,17 +230,18 @@ PopulateDonorUIDetails = function (donorRefID, DonorName, State, City, ContactNo
         //console.log('State:', State);
         registerDonorObj.donorDetails.State = State;
         //stateIndex = state_arr.indexOf(State);
-        stateIndex = state_arr[State];
+        //stateIndex = state_arr[State];
         let stateElement = document.getElementById("states");
-        stateElement.selectedIndex = stateIndex;
+        stateElement.selectedIndex = State;
         $(stateElement).attr('disabled', true);
     }
 
     if (City != null && City != "") {
         registerDonorObj.donorDetails.City = City;
         let cityElement = document.getElementById("cities");
-        //console.log('state index:', stateIndex); 
-        let selectedStateCities = city_arr[stateIndex].split("|"); //select all the cities of selected state
+        //console.log('city array:', city_arr);
+        //console.log('city selected:', city_arr[State]);
+        let selectedStateCities = city_arr[State].split("|"); //select all the cities of selected state
         selectedStateCities.forEach((element, index) => {
             cityElement.options[cityElement.options.length] = new Option(element.trim(), index);
             /*
@@ -277,16 +282,30 @@ PopulateDonorUIDetails = function (donorRefID, DonorName, State, City, ContactNo
         $('#gridRadios3')[0].checked = false;
     }
     */
-    BloodDonationOption = BloodDonationOption.trim();
+    registerDonorObj.donorDetails.LastDonatedDate = LastDonatedDate;
+    $('#donationOn').val(registerDonorObj.donorDetails.LastDonatedDate);
+
+    if (BloodDonationOption != '' && BloodDonationOption != null) {
+        BloodDonationOption = BloodDonationOption.trim();
+    }
+    else{
+        $('#gridRadios1')[0].checked = true;
+    }
     if (BloodDonationOption == 'NeverDonated') {
         $('#gridRadios1')[0].checked = true;
+        $('#donationOn').attr('readonly', true);
+        $("#donationOn").attr("disabled", true);
     }
     else if (BloodDonationOption == 'LastDonatedOn') {
         $('#gridRadios2')[0].checked = true;
-        registerDonorObj.donorDetails.LastDonatedDate = LastDonatedDate;
+        $('#donationOn').attr('readonly', false);
+        $("#donationOn").attr("disabled", false);
+
     }
     else if (BloodDonationOption == 'NoDonationWish') {
         $('#gridRadios3')[0].checked = true;
+        $('#donationOn').attr('readonly', true);
+        $("#donationOn").attr("disabled", true);
     }
 
     if (donorRefID != '0') {

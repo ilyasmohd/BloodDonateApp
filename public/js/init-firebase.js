@@ -142,12 +142,12 @@ function CheckDonorExists(donor) {
             if (snapshot.docs.length === 0) {
                 donor.donorDetails.donorReferenceID = '0';
                 PopulateDonorUIDetails(donor.donorDetails.donorReferenceID, donor.donorDetails.DonorName,
-                    null,
-                    null,
+                    '',
+                    '',
                     donor.donorDetails.ContactNo,
                     donor.donorDetails.Email,
-                    null,
-                    null
+                    '',
+                    ''
                 );
                 document.getElementById('registerFormLoading').style.display = 'none';
             } else {
